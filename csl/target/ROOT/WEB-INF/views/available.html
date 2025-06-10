@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Available Stations</title>
+</head>
+<body>
+	<h1>Available Stations</h1>
+	<p>Filters</p>
+	<table cellspacing="10">
+		<tr>
+			<td><a th:href="@{'/stations'}">All Stations</a></td>
+			<td><span>Available Stations</span></td>
+			<td><a th:href="@{'/stations/unavailable'}">Unavailable Stations</a></td>
+		</tr>
+		</table>
+
+	<table border="1" style="margin-top: 15px">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Location</th>
+			<th>Availability</th>
+			<th>Charging Speed (kW)</th>
+		</tr>
+		<tr th:each="station : ${stations}">
+			<td th:text="${station.id}"></td>
+			<td th:text="${station.name}"></td>
+			<td th:text="${station.location}"></td>
+			<td th:text="${station.availability ? 'Available' : 'Occupied'}"
+				th:style="${station.availability} ? 'color:green;' : 'color:red;'"></td>
+			<td th:text="${station.chargingSpeed}"></td>
+		</tr>
+	</table>
+	<p>
+		Total: <span th:text="${count}"></span>
+	</p>
+</body>
+</html>
